@@ -82,16 +82,9 @@ pub fn is_report_safe(readings: Vec<i8>, mulligan: bool) -> bool {
             //println!("failed decreasing: {}|{}={}",last_reading, r, (r - last_reading));
             bad_indexes.insert(index);
         }
-        //print!("{}:", r_num)
         index += 1;
         last_reading = r;
     }
-
-    print!("bi|");
-    for bi in &bad_indexes {
-        print!("{}:", bi);
-    }
-    println!();
 
     if bad_indexes.len() == 0 {
         return true;
@@ -115,15 +108,6 @@ pub fn is_report_safe(readings: Vec<i8>, mulligan: bool) -> bool {
         }
     }
 
-    //let safe = safe_increasing <=1 || safe_decreasing <=1;
-    //println!("|i:{}|d:{}|g:{}|safe:{}", all_increasing, all_decreasing, all_gradual, safe);
-    /*if safe {
-        println!("safe: {report}");
-    }
-    else {
-        println!("unsafe: {report}");
-    }*/
-    //safe
     false
 }
 
@@ -135,14 +119,14 @@ fn main() -> io::Result<()> {
     let mut num_safe_reports = 0;
     for line in reader.lines() {
         let line = line?; // Handle potential I/O errors.
-        println!("===========================\nreport: {}", line);
+        //println!("===========================\nreport: {}", line);
         let readings = report_to_readings(line);
         let safe = is_report_safe(readings, false);
         if safe {
             num_safe_reports += 1;
-            println!("| safe!");
+            //println!("| safe!");
         } else {
-            println!("| unsafe!");
+            //println!("| unsafe!");
         }
     }
     println!("safe reports: {}", num_safe_reports);
